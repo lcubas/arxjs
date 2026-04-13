@@ -20,12 +20,12 @@ Pick the schema file that matches your database dialect and merge it with your o
 import { schema as arxSchema } from '@arx/drizzle/schema/pg'
 import { pgTable, serial, text } from 'drizzle-orm/pg-core'
 
+export * from '@arx/drizzle/schema/sqlite';
+
 export const posts = pgTable('posts', {
   id:    serial('id').primaryKey(),
   title: text('title').notNull(),
 })
-
-export const schema = { ...arxSchema, posts }
 ```
 
 **MySQL**
@@ -33,12 +33,12 @@ export const schema = { ...arxSchema, posts }
 import { schema as arxSchema } from '@arx/drizzle/schema/mysql'
 import { int, mysqlTable, varchar } from 'drizzle-orm/mysql-core'
 
+export * from '@arx/drizzle/schema/sqlite';
+
 export const posts = mysqlTable('posts', {
   id:    int('id').primaryKey().autoincrement(),
   title: varchar('title', { length: 255 }).notNull(),
 })
-
-export const schema = { ...arxSchema, posts }
 ```
 
 **SQLite**
@@ -46,12 +46,12 @@ export const schema = { ...arxSchema, posts }
 import { schema as arxSchema } from '@arx/drizzle/schema/sqlite'
 import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core'
 
+export * from '@arx/drizzle/schema/sqlite';
+
 export const posts = sqliteTable('posts', {
   id:    integer('id').primaryKey({ autoIncrement: true }),
   title: text('title').notNull(),
 })
-
-export const schema = { ...arxSchema, posts }
 ```
 
 ### 2. Run migrations
@@ -69,7 +69,7 @@ Pass your Drizzle `db` instance and the arx schema tables:
 import { drizzle } from 'drizzle-orm/node-postgres'
 import { createAuthorization } from '@arx/core'
 import { DrizzleAdapter } from '@arx/drizzle'
-import { schema } from './schema'   // your merged schema
+import { schema } from '@arx/drizzle/schema/sqlite';
 
 const db = drizzle(process.env.DATABASE_URL)
 
@@ -122,28 +122,6 @@ const customSchema: ArxDrizzleSchema = {
 
 const arx = createAuthorization({
   adapter: new DrizzleAdapter(db, customSchema),
-})
-```
-
-## Testing
-
-Use the contract test suite from `@arx/core/testing` to verify your integration end-to-end:
-
-```ts
-// e.g., src/tests/drizzle-adapter.test.ts
-import { testStorageAdapterContract } from '@arx/core/testing'
-import { DrizzleAdapter } from '@arx/drizzle'
-import { schema } from '../schema'
-
-testStorageAdapterContract({
-  create: () => new DrizzleAdapter(db, schema),
-  reset:  async () => {
-    await db.delete(schema.userPermissions)
-    await db.delete(schema.userRoles)
-    await db.delete(schema.rolePermissions)
-    await db.delete(schema.roles)
-    await db.delete(schema.permissions)
-  },
 })
 ```
 

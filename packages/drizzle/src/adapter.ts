@@ -49,10 +49,10 @@ export type ArxDrizzleSchema = {
 // AnyDrizzleDB is a structural interface satisfied by the db instances returned
 // by drizzle() for all supported dialects (postgres-js, mysql2, better-sqlite3,
 // libsql, etc.). We intentionally use a loose structural type — real safety is
-// enforced by the dialect-specific schemas and the StorageAdapter contract.
+// enforced by the dialect-specific adapters and the StorageAdapter contract.
 
 // biome-ignore lint/suspicious/noExplicitAny: intentional — dialect-agnostic db wrapper
-type AnyDrizzleDB = Record<string, any>;
+export type AnyDrizzleDB = Record<string, any>;
 
 type RoleRow = { id: string; name: string; createdAt: Date };
 type PermissionRow = { id: string; name: string; createdAt: Date };
@@ -66,32 +66,17 @@ function toPermission(row: PermissionRow): Permission {
 }
 
 /**
- * Drizzle ORM implementation of the arx `StorageAdapter`.
+ * Abstract base class for all Drizzle ORM adapters.
  *
- * Works with PostgreSQL, MySQL, and SQLite — import the dialect-specific schema
- * from `@arx/drizzle/schema/pg`, `/schema/mysql`, or `/schema/sqlite` and pass
- * it as the second argument.
- *
- * Run `drizzle-kit generate` then `drizzle-kit migrate` (or push) to apply the
- * tables to your database before using this adapter.
- *
- * @example
- * import { drizzle } from 'drizzle-orm/postgres-js'
- * import postgres from 'postgres'
- * import { createAuthorization } from '@arx/core'
- * import { DrizzleAdapter } from '@arx/drizzle'
- * import { schema } from '@arx/drizzle/schema/pg'
- *
- * const db = drizzle(postgres(process.env.DATABASE_URL))
- *
- * const { can, assignRole, createRole } = createAuthorization({
- *   adapter: new DrizzleAdapter(db, schema),
- * })
+ * Contains all query logic shared across dialects. Each dialect subclass
+ * (`DrizzlePgAdapter`, `DrizzleMysqlAdapter`, `DrizzleSqliteAdapter`) calls
+ * `super(db, schema)` with its own pre-bundled schema — callers never need
+ * to pass a schema object directly.
  */
-export class DrizzleAdapter implements StorageAdapter {
-  constructor(
-    private readonly db: AnyDrizzleDB,
-    private readonly tables: ArxDrizzleSchema,
+export abstract class DrizzleAdapter implements StorageAdapter {
+  protected constructor(
+    protected readonly db: AnyDrizzleDB,
+    protected readonly tables: ArxDrizzleSchema,
   ) {}
 
   async createRole(name: string): Promise<Role> {
@@ -128,7 +113,7 @@ export class DrizzleAdapter implements StorageAdapter {
     const existing = await this.findPermission(name);
     if (existing) throw new PermissionAlreadyExistsError(name);
 
-    const id = crypto.randomUUID();
+    const id = randomUUID();
     const createdAt = new Date();
 
     await this.db.insert(this.tables.permissions).values({ id, name, createdAt });

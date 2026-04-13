@@ -1,12 +1,12 @@
-import { Inject } from '@nestjs/common';
 import {
-  createAuthorization,
   type Authorization,
   type CreatePermissionOptions,
   type CreateRoleOptions,
+  createAuthorization,
   type Permission,
   type Role,
 } from '@arx/core';
+import { Inject } from '@nestjs/common';
 import type { ArxModuleOptions } from './interfaces';
 import { ARX_MODULE_OPTIONS } from './tokens';
 
@@ -82,10 +82,7 @@ export class ArxService {
 
   // ─── Permissions ───────────────────────────────────────────────────────────
 
-  createPermission(
-    name: string,
-    options?: CreatePermissionOptions,
-  ): Promise<Permission> {
+  createPermission(name: string, options?: CreatePermissionOptions): Promise<Permission> {
     return this.arx.createPermission(name, options);
   }
 
@@ -101,17 +98,11 @@ export class ArxService {
     return this.arx.revokePermission(userId, permissionName);
   }
 
-  grantPermissionToRole(
-    roleName: string,
-    permissionName: string,
-  ): Promise<void> {
+  grantPermissionToRole(roleName: string, permissionName: string): Promise<void> {
     return this.arx.grantPermissionToRole(roleName, permissionName);
   }
 
-  revokePermissionFromRole(
-    roleName: string,
-    permissionName: string,
-  ): Promise<void> {
+  revokePermissionFromRole(roleName: string, permissionName: string): Promise<void> {
     return this.arx.revokePermissionFromRole(roleName, permissionName);
   }
 

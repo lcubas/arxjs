@@ -19,18 +19,13 @@
  *
  * @packageDocumentation
  */
-export { createAuthorization } from './authorization';
+
+// Adapter contract
+export type { StorageAdapter } from './adapter';
 export type { Authorization, AuthorizationConfig } from './authorization';
-
-// Domain entities
-export type {
-  Permission,
-  PermissionAssignment,
-  Role,
-  RoleAssignment,
-  RolePermissionAssignment,
-} from './types';
-
+export { createAuthorization } from './authorization';
+// Operation options
+export type { CreatePermissionOptions, CreateRoleOptions } from './engine';
 // Errors
 export {
   ArxError,
@@ -39,12 +34,13 @@ export {
   RoleAlreadyExistsError,
   RoleNotFoundError,
 } from './errors';
-
-// Adapter contract
-export type { StorageAdapter } from './adapter';
-
-// Operation options
-export type { CreatePermissionOptions, CreateRoleOptions } from './engine';
-
 // Testing adapter
 export { InMemoryAdapter } from './in-memory-adapter';
+// Domain entities
+export type {
+  Permission,
+  PermissionAssignment,
+  Role,
+  RoleAssignment,
+  RolePermissionAssignment,
+} from './types';

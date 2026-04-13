@@ -34,9 +34,7 @@ export interface ArxModuleOptions {
  * function depend on asynchronous providers (e.g. ConfigService).
  */
 export interface ArxModuleAsyncOptions {
-  useFactory: (
-    ...args: unknown[]
-  ) => Promise<ArxModuleOptions> | ArxModuleOptions;
+  useFactory: (...args: unknown[]) => Promise<ArxModuleOptions> | ArxModuleOptions;
   inject?: unknown[];
   isGlobal?: boolean;
 }

@@ -3,17 +3,19 @@
  *
  * ## Quick start
  *
+ * Pick the adapter that matches your database dialect:
+ *
  * ```ts
+ * // PostgreSQL
  * import { drizzle } from 'drizzle-orm/postgres-js'
  * import postgres from 'postgres'
  * import { createAuthorization } from '@arx/core'
- * import { DrizzleAdapter } from '@arx/drizzle'
- * import { schema } from '@arx/drizzle/schema/pg'
+ * import { DrizzlePgAdapter } from '@arx/drizzle'
  *
  * const db = drizzle(postgres(process.env.DATABASE_URL))
  *
  * const { can, assignRole, createRole } = createAuthorization({
- *   adapter: new DrizzleAdapter(db, schema),
+ *   adapter: new DrizzlePgAdapter(db),
  * })
  *
  * await createRole('editor', { permissions: ['edit:post', 'view:post'] })
@@ -22,13 +24,20 @@
  * const allowed = await can('user-1', 'edit:post') // true
  * ```
  *
- * Import the schema that matches your database dialect:
- * - PostgreSQL → `@arx/drizzle/schema/pg`
- * - MySQL      → `@arx/drizzle/schema/mysql`
- * - SQLite     → `@arx/drizzle/schema/sqlite`
+ * Available adapters:
+ * - PostgreSQL → `DrizzlePgAdapter`
+ * - MySQL      → `DrizzleMysqlAdapter`
+ * - SQLite     → `DrizzleSqliteAdapter`
+ *
+ * If you need the raw schema objects (e.g. for drizzle-kit migrations):
+ * - `@arx/drizzle/schema/pg`
+ * - `@arx/drizzle/schema/mysql`
+ * - `@arx/drizzle/schema/sqlite`
  *
  * @packageDocumentation
  */
-
+export type { AnyDrizzleDB, ArxDrizzleSchema } from './adapter';
 export { DrizzleAdapter } from './adapter';
-export type { ArxDrizzleSchema } from './adapter';
+export { DrizzleMysqlAdapter } from './adapters/mysql';
+export { DrizzlePgAdapter } from './adapters/pg';
+export { DrizzleSqliteAdapter } from './adapters/sqlite';

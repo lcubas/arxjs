@@ -48,9 +48,7 @@ export interface PrismaClientForArx {
       include: { permissions: { include: { permission: true } } };
     }): Promise<RoleWithPermissions[]>;
     // Fallback: without include → plain records
-    findMany(args: {
-      where: { users: { some: { userId: string } } };
-    }): Promise<RoleRecord[]>;
+    findMany(args: { where: { users: { some: { userId: string } } } }): Promise<RoleRecord[]>;
   };
   permission: {
     create(args: { data: { name: string } }): Promise<PermissionRecord>;
@@ -92,12 +90,10 @@ export interface PrismaClientForArx {
 }
 
 // Prisma error codes
-
 const PRISMA_UNIQUE_CONSTRAINT = 'P2002';
 const PRISMA_NOT_FOUND = 'P2025';
 
 // Helpers
-
 function toRole(record: RoleRecord): Role {
   return { id: record.id, name: record.name, createdAt: record.createdAt };
 }

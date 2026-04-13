@@ -1,7 +1,7 @@
 import { type DynamicModule, Module } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
-import { ArxService } from './arx.service';
 import { ArxGuard } from './arx.guard';
+import { ArxService } from './arx.service';
 import type { ArxModuleAsyncOptions, ArxModuleOptions } from './interfaces';
 import { ARX_MODULE_OPTIONS } from './tokens';
 
@@ -44,11 +44,8 @@ export class ArxModule {
         },
         {
           provide: ArxGuard,
-          useFactory: (
-            service: ArxService,
-            reflector: Reflector,
-            opts: ArxModuleOptions,
-          ) => new ArxGuard(service, reflector, opts),
+          useFactory: (service: ArxService, reflector: Reflector, opts: ArxModuleOptions) =>
+            new ArxGuard(service, reflector, opts),
           inject: [ArxService, Reflector, ARX_MODULE_OPTIONS],
         },
       ],
@@ -73,11 +70,8 @@ export class ArxModule {
         },
         {
           provide: ArxGuard,
-          useFactory: (
-            service: ArxService,
-            reflector: Reflector,
-            opts: ArxModuleOptions,
-          ) => new ArxGuard(service, reflector, opts),
+          useFactory: (service: ArxService, reflector: Reflector, opts: ArxModuleOptions) =>
+            new ArxGuard(service, reflector, opts),
           inject: [ArxService, Reflector, ARX_MODULE_OPTIONS],
         },
       ],

@@ -4,9 +4,9 @@ import {
   ForbiddenException,
   UnauthorizedException,
 } from '@nestjs/common';
-import { Reflector } from '@nestjs/core';
+import type { Reflector } from '@nestjs/core';
+import type { ArxService } from './arx.service';
 import type { ArxModuleOptions } from './interfaces';
-import { ArxService } from './arx.service';
 import { ARX_PERMISSIONS_KEY, ARX_ROLES_KEY } from './tokens';
 
 /**
@@ -36,17 +36,15 @@ export class ArxGuard implements CanActivate {
       [context.getHandler(), context.getClass()],
     );
 
-    const roles = this.reflector.getAllAndOverride<string[] | undefined>(
-      ARX_ROLES_KEY,
-      [context.getHandler(), context.getClass()],
-    );
+    const roles = this.reflector.getAllAndOverride<string[] | undefined>(ARX_ROLES_KEY, [
+      context.getHandler(),
+      context.getClass(),
+    ]);
 
     // Route has no arx decorators — allow through
     if (!permissions?.length && !roles?.length) return true;
 
-    const request = context
-      .switchToHttp()
-      .getRequest<Record<string, unknown>>();
+    const request = context.switchToHttp().getRequest<Record<string, unknown>>();
     const userId = this.options.getUserId(request);
 
     if (!userId) throw new UnauthorizedException();
@@ -57,9 +55,7 @@ export class ArxGuard implements CanActivate {
     }
 
     if (roles?.length) {
-      const checks = await Promise.all(
-        roles.map((role) => this.arx.hasRole(userId, role)),
-      );
+      const checks = await Promise.all(roles.map((role) => this.arx.hasRole(userId, role)));
       if (!checks.some(Boolean)) throw new ForbiddenException();
     }
 

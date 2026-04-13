@@ -27,5 +27,4 @@ export const RequirePermissions = (...permissions: [string, ...string[]]) =>
  * \@RequireRole('admin', 'moderator')
  * dashboard() { ... }
  */
-export const RequireRole = (...roles: [string, ...string[]]) =>
-  SetMetadata(ARX_ROLES_KEY, roles);
+export const RequireRole = (...roles: [string, ...string[]]) => SetMetadata(ARX_ROLES_KEY, roles);

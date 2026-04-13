@@ -51,11 +51,7 @@ describe('InMemoryAdapter', () => {
       await adapter.grantPermissionToUser('user-1', 'delete:post');
 
       const perms = await adapter.getEffectivePermissions('user-1');
-      expect(perms.map((p) => p.name).sort()).toEqual([
-        'delete:post',
-        'edit:post',
-        'view:post',
-      ]);
+      expect(perms.map((p) => p.name).sort()).toEqual(['delete:post', 'edit:post', 'view:post']);
     });
 
     it('returns empty array for a user with no assignments', async () => {

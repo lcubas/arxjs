@@ -103,27 +103,6 @@ See [`@arx/core`](https://github.com/your-org/arx/tree/main/packages/core) for t
 
 This means the adapter compiles without running `prisma generate`, and works even if your Prisma client is extended or wrapped.
 
-## Testing your own code against a real database
-
-Use the contract test suite from `@arx/core/testing` to verify your integration end-to-end:
-
-```ts
-// e.g., src/tests/prisma-adapter.test.ts
-import { testStorageAdapterContract } from '@arx/core/testing'
-import { PrismaAdapter } from '@arx/prisma'
-
-testStorageAdapterContract({
-  create: () => new PrismaAdapter(prisma),
-  reset:  async () => {
-    await prisma.userPermission.deleteMany()
-    await prisma.userRole.deleteMany()
-    await prisma.rolePermission.deleteMany()
-    await prisma.role.deleteMany()
-    await prisma.permission.deleteMany()
-  },
-})
-```
-
 ## Peer dependencies
 
 | Package | Version |
