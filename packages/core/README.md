@@ -136,9 +136,9 @@ afterEach(() => adapter.reset())
 
 | Package | ORM / Database |
 |---|---|
-| [`@arx/prisma`](https://github.com/your-org/arx/tree/main/packages/prisma) | Prisma — PostgreSQL, MySQL, SQLite, SQL Server, MongoDB |
-| [`@arx/drizzle`](https://github.com/your-org/arx/tree/main/packages/drizzle) | Drizzle ORM — PostgreSQL, MySQL, SQLite |
-| [`@arx/typeorm`](https://github.com/your-org/arx/tree/main/packages/typeorm) | TypeORM — PostgreSQL, MySQL, MariaDB, SQLite, SQL Server |
+| [`@arx/prisma`](https://github.com/lcubas/arx/tree/main/packages/prisma) | Prisma — PostgreSQL, MySQL, SQLite, SQL Server, MongoDB |
+| [`@arx/drizzle`](https://github.com/lcubas/arx/tree/main/packages/drizzle) | Drizzle ORM — PostgreSQL, MySQL, SQLite |
+| [`@arx/typeorm`](https://github.com/lcubas/arx/tree/main/packages/typeorm) | TypeORM — PostgreSQL, MySQL, MariaDB, SQLite, SQL Server |
 
 ## Database schema
 

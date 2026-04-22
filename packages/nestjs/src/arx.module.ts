@@ -53,7 +53,9 @@ export class ArxModule {
     };
   }
 
-  static forRootAsync(options: ArxModuleAsyncOptions): DynamicModule {
+  static forRootAsync<TArgs extends unknown[] = unknown[]>(
+    options: ArxModuleAsyncOptions<TArgs>,
+  ): DynamicModule {
     return {
       module: ArxModule,
       global: options.isGlobal ?? true,

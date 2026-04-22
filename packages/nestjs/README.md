@@ -1,6 +1,6 @@
 # @arx/nestjs
 
-NestJS module for [`@arx/core`](https://github.com/your-org/arx/tree/main/packages/core). Provides an injectable `ArxService`, a route guard, and declarative decorators for permission and role checks.
+NestJS module for [`@arx/core`](https://github.com/lcubas/arx/tree/main/packages/core). Provides an injectable `ArxService`, a route guard, and declarative decorators for permission and role checks.
 
 ## Installation
 
@@ -195,7 +195,7 @@ export class PostsService {
 }
 ```
 
-`ArxService` exposes the full `@arx/core` API — see [`@arx/core` docs](https://github.com/your-org/arx/tree/main/packages/core#api) for the complete reference.
+`ArxService` exposes the full `@arx/core` API — see [`@arx/core` docs](https://github.com/lcubas/arx/tree/main/packages/core#api) for the complete reference.
 
 ## Peer dependencies
 

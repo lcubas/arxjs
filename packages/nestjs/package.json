@@ -13,12 +13,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/your-org/arx.git",
+    "url": "https://github.com/lcubas/arx.git",
     "directory": "packages/nestjs"
   },
-  "homepage": "https://github.com/your-org/arx/tree/main/packages/nestjs#readme",
+  "homepage": "https://github.com/lcubas/arx/tree/main/packages/nestjs#readme",
   "bugs": {
-    "url": "https://github.com/your-org/arx/issues"
+    "url": "https://github.com/lcubas/arx/issues"
   },
   "type": "module",
   "engines": {

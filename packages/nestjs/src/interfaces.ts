@@ -33,8 +33,8 @@ export interface ArxModuleOptions {
  * Async variant of ArxModuleOptions for when the adapter or getUserId
  * function depend on asynchronous providers (e.g. ConfigService).
  */
-export interface ArxModuleAsyncOptions {
-  useFactory: (...args: unknown[]) => Promise<ArxModuleOptions> | ArxModuleOptions;
+export interface ArxModuleAsyncOptions<TArgs extends unknown[] = unknown[]> {
+  useFactory: (...args: TArgs) => Promise<ArxModuleOptions> | ArxModuleOptions;
   inject?: unknown[];
   isGlobal?: boolean;
 }
