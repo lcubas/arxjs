@@ -9,15 +9,17 @@ pnpm add @arx/nestjs @arx/core
 # npm install @arx/nestjs @arx/core
 ```
 
-Install your storage adapter of choice:
+Install a storage adapter:
 
 ```bash
-pnpm add @arx/prisma   # or @arx/drizzle
+pnpm add @arx/prisma    # Prisma
+pnpm add @arx/drizzle   # Drizzle ORM
+pnpm add @arx/typeorm   # TypeORM (also requires: typeorm reflect-metadata)
 ```
 
 ## Setup
 
-Register `ArxModule` once in your root `AppModule`. It is global by default.
+Register `ArxModule` once in your root `AppModule`. It is global by default, so you only need to import it once.
 
 ```ts
 // app.module.ts
@@ -30,32 +32,96 @@ import { PrismaService } from './prisma.service'
   imports: [
     ArxModule.forRoot({
       adapter: new PrismaAdapter(prisma),
-      getUserId: (req) => req.user?.id,  // adapt to your auth strategy
+      getUserId: (req) => req.user?.id,
     }),
   ],
 })
 export class AppModule {}
 ```
 
-Async configuration (e.g. when the adapter depends on `ConfigService`):
+### Async configuration
+
+Use `forRootAsync` when the adapter depends on other services (e.g. `PrismaService`, `DataSource`, `ConfigService`):
 
 ```ts
 ArxModule.forRootAsync({
-  inject: [ConfigService, PrismaService],
-  useFactory: (config: ConfigService, prisma: PrismaService) => ({
+  inject: [PrismaService],
+  useFactory: (prisma: PrismaService) => ({
     adapter: new PrismaAdapter(prisma),
     getUserId: (req) => req.user?.id,
   }),
 })
 ```
 
-## Declarative guards
+### Setup with TypeORM
 
-Apply `@RequirePermissions()` or `@RequireRole()` to protect routes, then add `ArxGuard` to your controller or register it globally.
+When using `@arx/typeorm`, the `DataSource` is managed by `@nestjs/typeorm` — inject it via `forRootAsync`:
+
+```bash
+pnpm add @arx/typeorm @nestjs/typeorm typeorm reflect-metadata
+```
+
+```ts
+// app.module.ts
+import 'reflect-metadata'
+import { Module } from '@nestjs/common'
+import { TypeOrmModule } from '@nestjs/typeorm'
+import { APP_GUARD } from '@nestjs/core'
+import { ArxModule, ArxGuard } from '@arx/nestjs'
+import { TypeOrmAdapter, ARX_TYPEORM_ENTITIES } from '@arx/typeorm'
+import { DataSource } from 'typeorm'
+
+@Module({
+  imports: [
+    // 1. Set up TypeORM with the arx entities
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      url: process.env.DATABASE_URL,
+      entities: [...ARX_TYPEORM_ENTITIES],
+      migrations: ['dist/migrations/*.js'],
+      migrationsRun: true, // run pending migrations automatically on startup
+    }),
+
+    // 2. Register ArxModule — inject DataSource managed by @nestjs/typeorm
+    ArxModule.forRootAsync({
+      inject: [DataSource],
+      useFactory: (dataSource: DataSource) => ({
+        adapter: new TypeOrmAdapter(dataSource),
+        getUserId: (req) => (req as { user?: { id?: string } }).user?.id,
+      }),
+    }),
+  ],
+  providers: [
+    // 3. (Optional) protect every route globally
+    { provide: APP_GUARD, useClass: ArxGuard },
+  ],
+})
+export class AppModule {}
+```
+
+From here, everything works the same as with any other adapter — use `@RequirePermissions`, `@RequireRole`, and `ArxService` as shown below.
+
+### `getUserId`
+
+The `getUserId` function receives the raw HTTP request object and must return the current user's ID as a string, or `undefined` if the user is not authenticated.
+
+```ts
+// Passport / JWT (request.user populated by a JwtAuthGuard)
+getUserId: (req) => req.user?.id
+
+// Custom header
+getUserId: (req) => req.headers['x-user-id'] as string | undefined
+```
+
+When `getUserId` returns `undefined` on a route protected by `@RequirePermissions` or `@RequireRole`, the guard throws `UnauthorizedException` (HTTP 401).
+
+## Protecting routes
+
+Apply `@RequirePermissions()` or `@RequireRole()` to your controllers or handlers, then add `ArxGuard` to enforce them.
 
 ```ts
 // posts.controller.ts
-import { Controller, Get, Post, UseGuards } from '@nestjs/common'
+import { Controller, Delete, Get, Post, UseGuards } from '@nestjs/common'
 import { ArxGuard, RequirePermissions, RequireRole } from '@arx/nestjs'
 
 @Controller('posts')
@@ -70,27 +136,47 @@ export class PostsController {
   @RequirePermissions('post:create')
   create() { ... }
 
+  @Delete(':id')
+  @RequirePermissions('post:delete')
+  remove() { ... }
+
   @Post('bulk-delete')
-  @RequireRole('admin', 'moderator')  // any one of these roles
+  @RequireRole('admin', 'moderator')   // any one of these roles is sufficient
   bulkDelete() { ... }
 }
 ```
 
-**Global guard** — protect every route in the application at once:
+### Decorator semantics
+
+| Decorator | Logic |
+|---|---|
+| `@RequirePermissions('a', 'b')` | User must hold **all** listed permissions (AND) |
+| `@RequireRole('admin', 'mod')` | User must hold **at least one** listed role (OR) |
+
+Handler-level decorators take precedence over controller-level ones when both are present.
+
+### Global guard
+
+To protect every route in the application without adding `@UseGuards(ArxGuard)` to every controller:
 
 ```ts
 // app.module.ts
 import { APP_GUARD } from '@nestjs/core'
 import { ArxGuard } from '@arx/nestjs'
 
-providers: [{ provide: APP_GUARD, useClass: ArxGuard }]
+@Module({
+  providers: [
+    { provide: APP_GUARD, useClass: ArxGuard },
+  ],
+})
+export class AppModule {}
 ```
 
-Routes without either decorator are allowed through, so you can opt-in per route.
+> **Important:** routes without `@RequirePermissions` or `@RequireRole` are **allowed through** even with the global guard active. This means your public routes (e.g. login, health check) require no extra work — the guard only enforces routes that have one of the decorators. If you want a route to be explicitly public and self-documenting, you can omit the decorators — it will pass through automatically.
 
 ## Programmatic checks
 
-Inject `ArxService` for imperative permission checks inside services or resolvers:
+Inject `ArxService` for imperative permission checks inside services, guards, or resolvers:
 
 ```ts
 // posts.service.ts
@@ -102,36 +188,14 @@ export class PostsService {
   constructor(private readonly arx: ArxService) {}
 
   async publish(userId: string, postId: string) {
-    if (!await this.arx.can(userId, 'post:publish')) {
-      throw new ForbiddenException()
-    }
+    const canPublish = await this.arx.can(userId, 'post:publish')
+    if (!canPublish) throw new ForbiddenException()
     // ...
   }
 }
 ```
 
 `ArxService` exposes the full `@arx/core` API — see [`@arx/core` docs](https://github.com/your-org/arx/tree/main/packages/core#api) for the complete reference.
-
-## getUserId
-
-The `getUserId` function receives the raw Express/Fastify request object and must return the current user's ID as a string, or `undefined` if the user is not authenticated. When `undefined` is returned on a guarded route, the guard throws `UnauthorizedException`.
-
-```ts
-// Passport JWT (request.user populated by JwtAuthGuard)
-getUserId: (req) => req.user?.id
-
-// Custom header
-getUserId: (req) => req.headers['x-user-id'] as string | undefined
-```
-
-## Decorator semantics
-
-| Decorator | Logic |
-|---|---|
-| `@RequirePermissions('a', 'b')` | User must hold **all** listed permissions |
-| `@RequireRole('admin', 'mod')` | User must hold **at least one** of the listed roles |
-
-Handler-level decorators take precedence over controller-level ones (`reflector.getAllAndOverride`).
 
 ## Peer dependencies
 

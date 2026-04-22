@@ -1,6 +1,6 @@
 # @arx/prisma
 
-[Prisma](https://www.prisma.io/) adapter for [`@arx/core`](https://github.com/your-org/arx/tree/main/packages/core). Supports any database Prisma supports (PostgreSQL, MySQL, SQLite, SQL Server, MongoDB, CockroachDB).
+[Prisma](https://www.prisma.io/) adapter for [`@arx/core`](https://github.com/your-org/arx/tree/main/packages/core). Supports any database Prisma supports — PostgreSQL, MySQL, SQLite, SQL Server, MongoDB, CockroachDB.
 
 ## Installation
 
@@ -9,11 +9,16 @@ pnpm add @arx/prisma @arx/core
 # npm install @arx/prisma @arx/core
 ```
 
-`@prisma/client` must already be installed and generated in your project.
+You also need `@prisma/client` (runtime) and `prisma` (CLI to run migrations):
+
+```bash
+pnpm add @prisma/client
+pnpm add -D prisma
+```
 
 ## Setup
 
-### 1. Add the arx schema to your `prisma/schema.prisma`
+### 1. Add the arx models to your `schema.prisma`
 
 ```prisma
 model Role {
@@ -27,11 +32,11 @@ model Role {
 }
 
 model Permission {
-  id          String             @id @default(cuid())
-  name        String             @unique
-  createdAt   DateTime           @default(now())
-  roles       RolePermission[]
-  users       UserPermission[]
+  id        String           @id @default(cuid())
+  name      String           @unique
+  createdAt DateTime         @default(now())
+  roles     RolePermission[]
+  users     UserPermission[]
 
   @@map("permissions")
 }
@@ -65,18 +70,20 @@ model UserPermission {
 }
 ```
 
-> **Note:** Model names (`Role`, `Permission`, etc.) are clean and unprefixed. If they collide with your own models, rename them and update the `@@map` table names accordingly.
+> **Model name conflicts?** The model names (`Role`, `Permission`, etc.) are intentionally unprefixed for ergonomics. If they conflict with your own models, rename them (e.g. `ArxRole`) and update the `@@map` names to keep the same underlying table names.
 
-### 2. Run migrations
+### 2. Generate and run the migration
 
 ```bash
 npx prisma migrate dev --name add-arx
 ```
 
+This command generates a SQL migration file and applies it to your development database. For production deployments, use `prisma migrate deploy` instead (it applies existing migrations without generating new ones).
+
 ### 3. Create the adapter
 
 ```ts
-import { PrismaClient }  from '@prisma/client'
+import { PrismaClient } from '@prisma/client'
 import { createAuthorization } from '@arx/core'
 import { PrismaAdapter } from '@arx/prisma'
 
@@ -99,9 +106,9 @@ See [`@arx/core`](https://github.com/your-org/arx/tree/main/packages/core) for t
 
 ## How it works
 
-`PrismaAdapter` accepts any object that implements the minimal `PrismaClientForArx` interface — the same duck-typing pattern used by NextAuth. You do **not** need to pass a fully-generated `PrismaClient`; any object with the required table accessors works.
+`PrismaAdapter` accepts any object that satisfies the `PrismaClientForArx` interface — the same structural typing pattern used by NextAuth. You do **not** need to pass a fully-generated `PrismaClient`; any object with the required table accessors works.
 
-This means the adapter compiles without running `prisma generate`, and works even if your Prisma client is extended or wrapped.
+This means the adapter compiles without running `prisma generate`, and works even if your Prisma client is extended or wrapped (e.g. with middleware).
 
 ## Peer dependencies
 

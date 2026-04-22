@@ -72,8 +72,6 @@ function toPermission(entity: ArxPermission): Permission {
 export class TypeOrmAdapter implements StorageAdapter {
   constructor(private readonly dataSource: DataSource) {}
 
-  // ─── Roles ───────────────────────────────────────────────────────────────
-
   async createRole(name: string): Promise<Role> {
     const repo = this.dataSource.getRepository(ArxRole);
     const entity = repo.create({ id: randomUUID(), name, createdAt: new Date() });
@@ -96,8 +94,6 @@ export class TypeOrmAdapter implements StorageAdapter {
     await this.dataSource.getRepository(ArxRole).delete({ name });
   }
 
-  // ─── Permissions ─────────────────────────────────────────────────────────
-
   async createPermission(name: string): Promise<Permission> {
     const repo = this.dataSource.getRepository(ArxPermission);
     const entity = repo.create({ id: randomUUID(), name, createdAt: new Date() });
@@ -119,8 +115,6 @@ export class TypeOrmAdapter implements StorageAdapter {
   async deletePermission(name: string): Promise<void> {
     await this.dataSource.getRepository(ArxPermission).delete({ name });
   }
-
-  // ─── Role ↔ Permission ───────────────────────────────────────────────────
 
   async grantPermissionToRole(roleName: string, permissionName: string): Promise<void> {
     const [role, permission] = await Promise.all([
@@ -166,8 +160,6 @@ export class TypeOrmAdapter implements StorageAdapter {
     return rows.map(toPermission);
   }
 
-  // ─── User ↔ Role ─────────────────────────────────────────────────────────
-
   async assignRoleToUser(userId: string, roleName: string): Promise<void> {
     const role = await this.findRole(roleName);
     if (!role) throw new RoleNotFoundError(roleName);
@@ -197,8 +189,6 @@ export class TypeOrmAdapter implements StorageAdapter {
 
     return rows.map(toRole);
   }
-
-  // ─── User ↔ Permission (direct) ──────────────────────────────────────────
 
   async grantPermissionToUser(userId: string, permissionName: string): Promise<void> {
     const permission = await this.findPermission(permissionName);
@@ -231,8 +221,6 @@ export class TypeOrmAdapter implements StorageAdapter {
 
     return rows.map(toPermission);
   }
-
-  // ─── Effective permissions ───────────────────────────────────────────────
 
   /**
    * Resolves all effective permissions for a user in two parallel queries:
