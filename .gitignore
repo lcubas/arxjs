@@ -41,3 +41,6 @@ pnpm-debug.log*
 .changeset/*.md
 !.changeset/config.json
 !.changeset/README.md
+
+# pnpm local store (created in sandboxed environments)
+.pnpm-store/
