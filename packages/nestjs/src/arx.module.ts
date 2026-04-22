@@ -33,6 +33,7 @@ export class ArxModule {
       module: ArxModule,
       global: options.isGlobal ?? true,
       providers: [
+        Reflector,
         {
           provide: ARX_MODULE_OPTIONS,
           useValue: options,
@@ -60,6 +61,7 @@ export class ArxModule {
       module: ArxModule,
       global: options.isGlobal ?? true,
       providers: [
+        Reflector,
         {
           provide: ARX_MODULE_OPTIONS,
           useFactory: options.useFactory,
