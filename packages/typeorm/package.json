@@ -1,0 +1,67 @@
+{
+  "name": "@arx/typeorm",
+  "version": "0.0.1",
+  "description": "TypeORM adapter for @arx/core — supports PostgreSQL, MySQL, SQLite, and more",
+  "keywords": [
+    "authorization",
+    "rbac",
+    "typeorm",
+    "adapter",
+    "typescript"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-org/arx.git",
+    "directory": "packages/typeorm"
+  },
+  "homepage": "https://github.com/your-org/arx/tree/main/packages/typeorm#readme",
+  "bugs": {
+    "url": "https://github.com/your-org/arx/issues"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.cts",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsdown src/index.ts --format esm,cjs --dts --sourcemap --no-splitting --clean --external typeorm --external @arx/core",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "@arx/core": "*",
+    "typeorm": ">=0.3.0"
+  },
+  "devDependencies": {
+    "@arx/core": "workspace:*",
+    "@types/node": "*",
+    "reflect-metadata": "^0.2.0",
+    "tsdown": "^0.21.0",
+    "typeorm": "^0.3.0",
+    "typescript": "^5.7.0",
+    "vitest": "^4.0.0"
+  }
+}
