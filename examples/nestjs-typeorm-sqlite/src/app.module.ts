@@ -1,6 +1,6 @@
 import { ArxGuard, ArxModule } from '@arx/nestjs';
 import { ARX_TYPEORM_ENTITIES, TypeOrmAdapter } from '@arx/typeorm';
-import { Module } from '@nestjs/common';
+import { ForbiddenException, Module, UnauthorizedException } from '@nestjs/common';
 import { APP_GUARD } from '@nestjs/core';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
@@ -29,6 +29,14 @@ import { SeedModule } from './seed/seed.module';
           const id = (req as Record<string, unknown>).headers as Record<string, string>;
           return id['x-user-id'] ?? undefined;
         },
+        // ArxGuard delegates exception throwing to the consuming app so that
+        // @arx/nestjs stays decoupled from any specific NestJS version.
+        onUnauthorized: () => {
+          throw new UnauthorizedException();
+        },
+        onForbidden: () => {
+          throw new ForbiddenException();
+        },
       }),
     }),
 
@@ -39,7 +47,7 @@ import { SeedModule } from './seed/seed.module';
     // 3. Apply ArxGuard globally — every route decorated with
     // @RequirePermissions or @RequireRole will be protected automatically.
     // Routes without either decorator are public.
-    { provide: APP_GUARD, useClass: ArxGuard },
+    { provide: APP_GUARD, useExisting: ArxGuard },
   ],
 })
 export class AppModule {}
