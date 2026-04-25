@@ -53,8 +53,8 @@
   },
   "peerDependencies": {
     "@arx/core": "*",
-    "@nestjs/common": ">=10.0.0",
-    "@nestjs/core": ">=10.0.0",
+    "@nestjs/common": "^10.0.0 || ^11.0.0",
+    "@nestjs/core": "^10.0.0 || ^11.0.0",
     "reflect-metadata": ">=0.1.12"
   },
   "devDependencies": {
