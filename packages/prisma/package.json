@@ -1,7 +1,7 @@
 {
-  "name": "@arx/prisma",
+  "name": "@arxjs/prisma",
   "version": "0.0.1",
-  "description": "Prisma adapter for @arx/core — supports all databases Prisma supports",
+  "description": "Prisma adapter for @arxjs/core — supports all databases Prisma supports",
   "keywords": [
     "authorization",
     "rbac",
@@ -48,17 +48,17 @@
     "access": "public"
   },
   "scripts": {
-    "build": "tsdown src/index.ts --format esm,cjs --dts --sourcemap --no-splitting --clean --external @prisma/client --external @arx/core",
+    "build": "tsdown src/index.ts --format esm,cjs --dts --sourcemap --no-splitting --clean --external @prisma/client --external @arxjs/core",
     "test": "vitest run",
     "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
     "@prisma/client": ">=5.0.0",
-    "@arx/core": "*"
+    "@arxjs/core": "*"
   },
   "devDependencies": {
     "@prisma/client": "^5.0.0",
-    "@arx/core": "workspace:*",
+    "@arxjs/core": "workspace:*",
     "tsdown": "^0.21.0",
     "typescript": "^5.7.0",
     "vitest": "^4.0.0"

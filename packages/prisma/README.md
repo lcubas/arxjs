@@ -1,12 +1,12 @@
-# @arx/prisma
+# @arxjs/prisma
 
-[Prisma](https://www.prisma.io/) adapter for [`@arx/core`](https://github.com/lcubas/arx/tree/main/packages/core). Supports any database Prisma supports — PostgreSQL, MySQL, SQLite, SQL Server, MongoDB, CockroachDB.
+[Prisma](https://www.prisma.io/) adapter for [`@arxjs/core`](https://github.com/lcubas/arx/tree/main/packages/core). Supports any database Prisma supports — PostgreSQL, MySQL, SQLite, SQL Server, MongoDB, CockroachDB.
 
 ## Installation
 
 ```bash
-pnpm add @arx/prisma @arx/core
-# npm install @arx/prisma @arx/core
+pnpm add @arxjs/prisma @arxjs/core
+# npm install @arxjs/prisma @arxjs/core
 ```
 
 You also need `@prisma/client` (runtime) and `prisma` (CLI to run migrations):
@@ -84,8 +84,8 @@ This command generates a SQL migration file and applies it to your development d
 
 ```ts
 import { PrismaClient } from '@prisma/client'
-import { createAuthorization } from '@arx/core'
-import { PrismaAdapter } from '@arx/prisma'
+import { createAuthorization } from '@arxjs/core'
+import { PrismaAdapter } from '@arxjs/prisma'
 
 const prisma = new PrismaClient()
 
@@ -102,7 +102,7 @@ await arx.assignRole('user-1', 'editor')
 await arx.can('user-1', 'post:edit') // true
 ```
 
-See [`@arx/core`](https://github.com/lcubas/arx/tree/main/packages/core) for the full API reference.
+See [`@arxjs/core`](https://github.com/lcubas/arx/tree/main/packages/core) for the full API reference.
 
 ## How it works
 
@@ -114,7 +114,7 @@ This means the adapter compiles without running `prisma generate`, and works eve
 
 | Package | Version |
 |---|---|
-| `@arx/core` | `*` |
+| `@arxjs/core` | `*` |
 | `@prisma/client` | `>=5.0.0` |
 
 ## License

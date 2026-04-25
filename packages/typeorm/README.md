@@ -1,12 +1,12 @@
-# @arx/typeorm
+# @arxjs/typeorm
 
-[TypeORM](https://typeorm.io/) adapter for [`@arx/core`](https://github.com/lcubas/arx/tree/main/packages/core). Supports any database TypeORM supports — PostgreSQL, MySQL, MariaDB, SQLite, SQL Server, and more.
+[TypeORM](https://typeorm.io/) adapter for [`@arxjs/core`](https://github.com/lcubas/arx/tree/main/packages/core). Supports any database TypeORM supports — PostgreSQL, MySQL, MariaDB, SQLite, SQL Server, and more.
 
 ## Installation
 
 ```bash
-pnpm add @arx/typeorm @arx/core typeorm reflect-metadata
-# npm install @arx/typeorm @arx/core typeorm reflect-metadata
+pnpm add @arxjs/typeorm @arxjs/core typeorm reflect-metadata
+# npm install @arxjs/typeorm @arxjs/core typeorm reflect-metadata
 ```
 
 > **Why `reflect-metadata`?** TypeORM's decorator system requires it. It must be imported once at the very top of your application entry point, before any other imports.
@@ -34,7 +34,7 @@ arx provides five entity classes. Use `ARX_TYPEORM_ENTITIES` to register them al
 // data-source.ts
 import 'reflect-metadata'
 import { DataSource } from 'typeorm'
-import { ARX_TYPEORM_ENTITIES } from '@arx/typeorm'
+import { ARX_TYPEORM_ENTITIES } from '@arxjs/typeorm'
 
 export const dataSource = new DataSource({
   type: 'postgres',
@@ -82,8 +82,8 @@ new DataSource({
 ```ts
 import 'reflect-metadata'
 import { DataSource } from 'typeorm'
-import { createAuthorization } from '@arx/core'
-import { TypeOrmAdapter, ARX_TYPEORM_ENTITIES } from '@arx/typeorm'
+import { createAuthorization } from '@arxjs/core'
+import { TypeOrmAdapter, ARX_TYPEORM_ENTITIES } from '@arxjs/typeorm'
 
 const dataSource = new DataSource({
   type: 'postgres',
@@ -107,7 +107,7 @@ await arx.assignRole('user-1', 'editor')
 await arx.can('user-1', 'post:edit') // true
 ```
 
-See [`@arx/core`](https://github.com/lcubas/arx/tree/main/packages/core) for the full API reference.
+See [`@arxjs/core`](https://github.com/lcubas/arx/tree/main/packages/core) for the full API reference.
 
 ## Tables created
 
@@ -119,19 +119,19 @@ See [`@arx/core`](https://github.com/lcubas/arx/tree/main/packages/core) for the
 | `arx_user_roles` | User → role assignments |
 | `arx_user_permissions` | Direct user → permission grants |
 
-Tables are prefixed with `arx_` to avoid conflicts with your own entities. See the [database schema reference](https://github.com/lcubas/arx/tree/main/packages/core#database-schema) in `@arx/core` for the full column and constraint details.
+Tables are prefixed with `arx_` to avoid conflicts with your own entities. See the [database schema reference](https://github.com/lcubas/arx/tree/main/packages/core#database-schema) in `@arxjs/core` for the full column and constraint details.
 
 ## NestJS integration
 
-Use together with [`@arx/nestjs`](https://github.com/lcubas/arx/tree/main/packages/nestjs) and `@nestjs/typeorm`:
+Use together with [`@arxjs/nestjs`](https://github.com/lcubas/arx/tree/main/packages/nestjs) and `@nestjs/typeorm`:
 
 ```ts
 // app.module.ts
 import 'reflect-metadata'
 import { Module } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
-import { ArxModule } from '@arx/nestjs'
-import { TypeOrmAdapter, ARX_TYPEORM_ENTITIES } from '@arx/typeorm'
+import { ArxModule } from '@arxjs/nestjs'
+import { TypeOrmAdapter, ARX_TYPEORM_ENTITIES } from '@arxjs/typeorm'
 import { DataSource } from 'typeorm'
 
 @Module({
@@ -161,7 +161,7 @@ With NestJS, `@nestjs/typeorm` manages the `DataSource` lifecycle. Injecting it 
 
 | Package | Version |
 |---|---|
-| `@arx/core` | `*` |
+| `@arxjs/core` | `*` |
 | `typeorm` | `>=0.3.0` |
 
 ## License

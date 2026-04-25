@@ -1,18 +1,18 @@
 import { randomUUID } from 'node:crypto';
-import type { Permission, Role, StorageAdapter } from '@arx/core';
+import type { Permission, Role, StorageAdapter } from '@arxjs/core';
 import {
   PermissionAlreadyExistsError,
   PermissionNotFoundError,
   RoleAlreadyExistsError,
   RoleNotFoundError,
-} from '@arx/core';
+} from '@arxjs/core';
 import type { Column } from 'drizzle-orm';
 import { and, eq } from 'drizzle-orm';
 
 // Schema type
 //
 // ArxDrizzleSchema describes the shape that the schema objects exported from
-// @arx/drizzle/schema/pg, /schema/mysql, and /schema/sqlite all conform to.
+// @arxjs/drizzle/schema/pg, /schema/mysql, and /schema/sqlite all conform to.
 //
 // Using `Column` (the drizzle-orm base type) lets us pass these fields directly
 // to `eq()` without casts, while remaining compatible with all three dialects.

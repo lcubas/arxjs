@@ -1,12 +1,12 @@
 /**
- * @arx/prisma — Prisma adapter for the arx authorization library.
+ * @arxjs/prisma — Prisma adapter for the arx authorization library.
  *
  * ## Quick start
  *
  * ```ts
  * import { PrismaClient } from '@prisma/client'
- * import { createAuthorization } from '@arx/core'
- * import { PrismaAdapter } from '@arx/prisma'
+ * import { createAuthorization } from '@arxjs/core'
+ * import { PrismaAdapter } from '@arxjs/prisma'
  *
  * const prisma = new PrismaClient()
  *

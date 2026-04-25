@@ -1,10 +1,10 @@
-import type { Permission, Role, StorageAdapter } from '@arx/core';
+import type { Permission, Role, StorageAdapter } from '@arxjs/core';
 import {
   PermissionAlreadyExistsError,
   PermissionNotFoundError,
   RoleAlreadyExistsError,
   RoleNotFoundError,
-} from '@arx/core';
+} from '@arxjs/core';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 
 type RoleRecord = {
@@ -33,7 +33,7 @@ type RoleWithPermissions = RoleRecord & {
  *
  * @example
  * import { PrismaClient } from '@prisma/client'
- * import { PrismaAdapter } from '@arx/prisma'
+ * import { PrismaAdapter } from '@arxjs/prisma'
  *
  * const adapter = new PrismaAdapter(new PrismaClient())
  */
@@ -106,13 +106,13 @@ function toPermission(record: PermissionRecord): Permission {
  * Prisma implementation of the arx `StorageAdapter`.
  *
  * Requires a Prisma client with the Arx models defined in your `schema.prisma`.
- * Copy the reference schema from `node_modules/@arx/prisma/schema.prisma` and
+ * Copy the reference schema from `node_modules/@arxjs/prisma/schema.prisma` and
  * run `prisma migrate dev` to apply the tables.
  *
  * @example
  * import { PrismaClient } from '@prisma/client'
- * import { createAuthorization } from '@arx/core'
- * import { PrismaAdapter } from '@arx/prisma'
+ * import { createAuthorization } from '@arxjs/core'
+ * import { PrismaAdapter } from '@arxjs/prisma'
  *
  * const prisma = new PrismaClient()
  *

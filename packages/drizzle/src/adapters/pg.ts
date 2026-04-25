@@ -6,13 +6,13 @@ import { schema } from '../schema/pg';
  *
  * Bundles the PostgreSQL schema internally — no schema argument needed.
  * Run `drizzle-kit generate` then `drizzle-kit migrate` (or push) using
- * the schema from `@arx/drizzle/schema/pg` before using this adapter.
+ * the schema from `@arxjs/drizzle/schema/pg` before using this adapter.
  *
  * @example
  * import { drizzle } from 'drizzle-orm/postgres-js'
  * import postgres from 'postgres'
- * import { createAuthorization } from '@arx/core'
- * import { DrizzlePgAdapter } from '@arx/drizzle'
+ * import { createAuthorization } from '@arxjs/core'
+ * import { DrizzlePgAdapter } from '@arxjs/drizzle'
  *
  * const db = drizzle(postgres(process.env.DATABASE_URL))
  *

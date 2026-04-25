@@ -14,7 +14,7 @@ import type { Permission, Role } from './types';
  * restarts and is not safe for concurrent use across multiple instances.
  *
  * @example
- * import { InMemoryAdapter, createAuthorization } from '@arx/core'
+ * import { InMemoryAdapter, createAuthorization } from '@arxjs/core'
  *
  * const adapter = new InMemoryAdapter()
  * const { can, assignRole } = createAuthorization({ adapter })

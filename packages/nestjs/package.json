@@ -1,7 +1,7 @@
 {
-  "name": "@arx/nestjs",
+  "name": "@arxjs/nestjs",
   "version": "0.0.1",
-  "description": "NestJS module for @arx/core — guards, decorators and injectable service",
+  "description": "NestJS module for @arxjs/core — guards, decorators and injectable service",
   "keywords": [
     "authorization",
     "rbac",
@@ -48,17 +48,17 @@
     "access": "public"
   },
   "scripts": {
-    "build": "tsdown src/index.ts --format esm,cjs --dts --sourcemap --no-splitting --clean --external @nestjs/common --external @nestjs/core --external reflect-metadata --external @arx/core",
+    "build": "tsdown src/index.ts --format esm,cjs --dts --sourcemap --no-splitting --clean --external @nestjs/common --external @nestjs/core --external reflect-metadata --external @arxjs/core",
     "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
-    "@arx/core": "*",
+    "@arxjs/core": "*",
     "@nestjs/common": "^10.0.0 || ^11.0.0",
     "@nestjs/core": "^10.0.0 || ^11.0.0",
     "reflect-metadata": ">=0.1.12"
   },
   "devDependencies": {
-    "@arx/core": "workspace:*",
+    "@arxjs/core": "workspace:*",
     "@nestjs/common": "^10.0.0",
     "@nestjs/core": "^10.0.0",
     "reflect-metadata": "^0.2.0",

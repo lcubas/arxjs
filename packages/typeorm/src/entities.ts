@@ -10,7 +10,7 @@ import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm';
  * import {
  *   ArxRole, ArxPermission, ArxRolePermission,
  *   ArxUserRole, ArxUserPermission,
- * } from '@arx/typeorm'
+ * } from '@arxjs/typeorm'
  *
  * const dataSource = new DataSource({
  *   type: 'postgres',

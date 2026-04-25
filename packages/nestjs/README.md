@@ -1,20 +1,20 @@
-# @arx/nestjs
+# @arxjs/nestjs
 
-NestJS module for [`@arx/core`](https://github.com/lcubas/arx/tree/main/packages/core). Provides an injectable `ArxService`, a route guard, and declarative decorators for permission and role checks.
+NestJS module for [`@arxjs/core`](https://github.com/lcubas/arx/tree/main/packages/core). Provides an injectable `ArxService`, a route guard, and declarative decorators for permission and role checks.
 
 ## Installation
 
 ```bash
-pnpm add @arx/nestjs @arx/core
-# npm install @arx/nestjs @arx/core
+pnpm add @arxjs/nestjs @arxjs/core
+# npm install @arxjs/nestjs @arxjs/core
 ```
 
 Install a storage adapter:
 
 ```bash
-pnpm add @arx/prisma    # Prisma
-pnpm add @arx/drizzle   # Drizzle ORM
-pnpm add @arx/typeorm   # TypeORM (also requires: typeorm reflect-metadata)
+pnpm add @arxjs/prisma    # Prisma
+pnpm add @arxjs/drizzle   # Drizzle ORM
+pnpm add @arxjs/typeorm   # TypeORM (also requires: typeorm reflect-metadata)
 ```
 
 ## Setup
@@ -24,8 +24,8 @@ Register `ArxModule` once in your root `AppModule`. It is global by default, so 
 ```ts
 // app.module.ts
 import { Module } from '@nestjs/common'
-import { ArxModule } from '@arx/nestjs'
-import { PrismaAdapter } from '@arx/prisma'
+import { ArxModule } from '@arxjs/nestjs'
+import { PrismaAdapter } from '@arxjs/prisma'
 import { PrismaService } from './prisma.service'
 
 @Module({
@@ -55,10 +55,10 @@ ArxModule.forRootAsync({
 
 ### Setup with TypeORM
 
-When using `@arx/typeorm`, the `DataSource` is managed by `@nestjs/typeorm` — inject it via `forRootAsync`:
+When using `@arxjs/typeorm`, the `DataSource` is managed by `@nestjs/typeorm` — inject it via `forRootAsync`:
 
 ```bash
-pnpm add @arx/typeorm @nestjs/typeorm typeorm reflect-metadata
+pnpm add @arxjs/typeorm @nestjs/typeorm typeorm reflect-metadata
 ```
 
 ```ts
@@ -67,8 +67,8 @@ import 'reflect-metadata'
 import { Module } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { APP_GUARD } from '@nestjs/core'
-import { ArxModule, ArxGuard } from '@arx/nestjs'
-import { TypeOrmAdapter, ARX_TYPEORM_ENTITIES } from '@arx/typeorm'
+import { ArxModule, ArxGuard } from '@arxjs/nestjs'
+import { TypeOrmAdapter, ARX_TYPEORM_ENTITIES } from '@arxjs/typeorm'
 import { DataSource } from 'typeorm'
 
 @Module({
@@ -122,7 +122,7 @@ Apply `@RequirePermissions()` or `@RequireRole()` to your controllers or handler
 ```ts
 // posts.controller.ts
 import { Controller, Delete, Get, Post, UseGuards } from '@nestjs/common'
-import { ArxGuard, RequirePermissions, RequireRole } from '@arx/nestjs'
+import { ArxGuard, RequirePermissions, RequireRole } from '@arxjs/nestjs'
 
 @Controller('posts')
 @UseGuards(ArxGuard)
@@ -162,7 +162,7 @@ To protect every route in the application without adding `@UseGuards(ArxGuard)` 
 ```ts
 // app.module.ts
 import { APP_GUARD } from '@nestjs/core'
-import { ArxGuard } from '@arx/nestjs'
+import { ArxGuard } from '@arxjs/nestjs'
 
 @Module({
   providers: [
@@ -181,7 +181,7 @@ Inject `ArxService` for imperative permission checks inside services, guards, or
 ```ts
 // posts.service.ts
 import { Injectable, ForbiddenException } from '@nestjs/common'
-import { ArxService } from '@arx/nestjs'
+import { ArxService } from '@arxjs/nestjs'
 
 @Injectable()
 export class PostsService {
@@ -195,13 +195,13 @@ export class PostsService {
 }
 ```
 
-`ArxService` exposes the full `@arx/core` API — see [`@arx/core` docs](https://github.com/lcubas/arx/tree/main/packages/core#api) for the complete reference.
+`ArxService` exposes the full `@arxjs/core` API — see [`@arxjs/core` docs](https://github.com/lcubas/arx/tree/main/packages/core#api) for the complete reference.
 
 ## Peer dependencies
 
 | Package | Version |
 |---|---|
-| `@arx/core` | `*` |
+| `@arxjs/core` | `*` |
 | `@nestjs/common` | `>=10.0.0` |
 | `@nestjs/core` | `>=10.0.0` |
 | `reflect-metadata` | `>=0.1.12` |

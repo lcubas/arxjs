@@ -1,5 +1,5 @@
 {
-  "name": "@arx/core",
+  "name": "@arxjs/core",
   "version": "0.0.1",
   "description": "Modern authorization library for Node.js and TypeScript",
   "keywords": [

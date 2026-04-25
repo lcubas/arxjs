@@ -1,5 +1,5 @@
 /**
- * @arx/drizzle — Drizzle ORM adapter for the arx authorization library.
+ * @arxjs/drizzle — Drizzle ORM adapter for the arx authorization library.
  *
  * ## Quick start
  *
@@ -9,8 +9,8 @@
  * // PostgreSQL
  * import { drizzle } from 'drizzle-orm/postgres-js'
  * import postgres from 'postgres'
- * import { createAuthorization } from '@arx/core'
- * import { DrizzlePgAdapter } from '@arx/drizzle'
+ * import { createAuthorization } from '@arxjs/core'
+ * import { DrizzlePgAdapter } from '@arxjs/drizzle'
  *
  * const db = drizzle(postgres(process.env.DATABASE_URL))
  *
@@ -30,9 +30,9 @@
  * - SQLite     → `DrizzleSqliteAdapter`
  *
  * If you need the raw schema objects (e.g. for drizzle-kit migrations):
- * - `@arx/drizzle/schema/pg`
- * - `@arx/drizzle/schema/mysql`
- * - `@arx/drizzle/schema/sqlite`
+ * - `@arxjs/drizzle/schema/pg`
+ * - `@arxjs/drizzle/schema/mysql`
+ * - `@arxjs/drizzle/schema/sqlite`
  *
  * @packageDocumentation
  */

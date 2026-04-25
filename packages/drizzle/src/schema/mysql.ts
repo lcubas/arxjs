@@ -64,8 +64,8 @@ export const userPermissions = mysqlTable(
  *
  * @example
  * import { drizzle } from 'drizzle-orm/mysql2'
- * import { schema } from '@arx/drizzle/schema/mysql'
- * import { DrizzleAdapter } from '@arx/drizzle'
+ * import { schema } from '@arxjs/drizzle/schema/mysql'
+ * import { DrizzleAdapter } from '@arxjs/drizzle'
  *
  * const db = drizzle(client)
  * const adapter = new DrizzleAdapter(db, schema)

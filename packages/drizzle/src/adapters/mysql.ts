@@ -6,13 +6,13 @@ import { schema } from '../schema/mysql';
  *
  * Bundles the MySQL schema internally — no schema argument needed.
  * Run `drizzle-kit generate` then `drizzle-kit migrate` (or push) using
- * the schema from `@arx/drizzle/schema/mysql` before using this adapter.
+ * the schema from `@arxjs/drizzle/schema/mysql` before using this adapter.
  *
  * @example
  * import { drizzle } from 'drizzle-orm/mysql2'
  * import mysql from 'mysql2/promise'
- * import { createAuthorization } from '@arx/core'
- * import { DrizzleMysqlAdapter } from '@arx/drizzle'
+ * import { createAuthorization } from '@arxjs/core'
+ * import { DrizzleMysqlAdapter } from '@arxjs/drizzle'
  *
  * const connection = await mysql.createConnection(process.env.DATABASE_URL)
  * const db = drizzle(connection)

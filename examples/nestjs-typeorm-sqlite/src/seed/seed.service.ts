@@ -1,4 +1,4 @@
-import { ArxService } from '@arx/nestjs';
+import type { ArxService } from '@arxjs/nestjs';
 import { Injectable, Logger } from '@nestjs/common';
 
 @Injectable()

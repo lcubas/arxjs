@@ -1,5 +1,5 @@
-import { createAuthorization } from '@arx/core';
-import { DrizzleSqliteAdapter } from '@arx/drizzle';
+import { createAuthorization } from '@arxjs/core';
+import { DrizzleSqliteAdapter } from '@arxjs/drizzle';
 import Database from 'better-sqlite3';
 import { drizzle } from 'drizzle-orm/better-sqlite3';
 

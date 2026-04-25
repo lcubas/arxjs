@@ -68,8 +68,8 @@ export const userPermissions = sqliteTable(
  *
  * @example
  * import { drizzle } from 'drizzle-orm/better-sqlite3'
- * import { schema } from '@arx/drizzle/schema/sqlite'
- * import { DrizzleAdapter } from '@arx/drizzle'
+ * import { schema } from '@arxjs/drizzle/schema/sqlite'
+ * import { DrizzleAdapter } from '@arxjs/drizzle'
  *
  * const db = drizzle(client)
  * const adapter = new DrizzleAdapter(db, schema)

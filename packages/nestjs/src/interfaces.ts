@@ -1,4 +1,4 @@
-import type { StorageAdapter } from '@arx/core';
+import type { StorageAdapter } from '@arxjs/core';
 import type { ExecutionContext } from '@nestjs/common';
 
 /**

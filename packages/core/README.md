@@ -1,4 +1,4 @@
-# @arx/core
+# @arxjs/core
 
 Modern, type-safe authorization library for Node.js and TypeScript. Provides Role-Based Access Control (RBAC) with direct permission grants — storage-agnostic via an adapter pattern.
 
@@ -6,16 +6,16 @@ Modern, type-safe authorization library for Node.js and TypeScript. Provides Rol
 
 - **RBAC + direct permissions** — assign roles and/or permissions directly to users
 - **Storage-agnostic** — bring your own database via a `StorageAdapter`; official adapters for [Prisma](./../prisma), [Drizzle ORM](./../drizzle), and [TypeORM](./../typeorm) are available
-- **Fully typed** — strict TypeScript 5.x, zero `any` in the public API
+- **Fully typed** — strict TypeScript 5.x
 - **Minimal surface** — one factory function, everything else is tree-shakeable
 - **Built-in test adapter** — `InMemoryAdapter` for unit tests and prototyping
 
 ## Installation
 
 ```bash
-pnpm add @arx/core
-# npm install @arx/core
-# yarn add @arx/core
+pnpm add @arxjs/core
+# npm install @arxjs/core
+# yarn add @arxjs/core
 ```
 
 You also need a storage adapter. See the [available adapters](#available-adapters).
@@ -23,8 +23,8 @@ You also need a storage adapter. See the [available adapters](#available-adapter
 ## Quick start
 
 ```ts
-import { createAuthorization } from '@arx/core'
-import { PrismaAdapter } from '@arx/prisma'
+import { createAuthorization } from '@arxjs/core'
+import { PrismaAdapter } from '@arxjs/prisma'
 
 const arx = createAuthorization({
   adapter: new PrismaAdapter(prisma),
@@ -108,7 +108,7 @@ All errors extend `ArxError` which extends `Error`.
 Each error exposes the offending name as a typed property (`roleName` or `permissionName`):
 
 ```ts
-import { RoleNotFoundError } from '@arx/core'
+import { RoleNotFoundError } from '@arxjs/core'
 
 try {
   await arx.assignRole(userId, 'ghost')
@@ -121,10 +121,10 @@ try {
 
 ## In-memory adapter
 
-`InMemoryAdapter` is included in `@arx/core` for unit tests and prototyping. It holds all data in memory and provides a `reset()` method to clear state between tests.
+`InMemoryAdapter` is included in `@arxjs/core` for unit tests and prototyping. It holds all data in memory and provides a `reset()` method to clear state between tests.
 
 ```ts
-import { createAuthorization, InMemoryAdapter } from '@arx/core'
+import { createAuthorization, InMemoryAdapter } from '@arxjs/core'
 
 const adapter = new InMemoryAdapter()
 const arx = createAuthorization({ adapter })
@@ -136,9 +136,9 @@ afterEach(() => adapter.reset())
 
 | Package | ORM / Database |
 |---|---|
-| [`@arx/prisma`](https://github.com/lcubas/arx/tree/main/packages/prisma) | Prisma — PostgreSQL, MySQL, SQLite, SQL Server, MongoDB |
-| [`@arx/drizzle`](https://github.com/lcubas/arx/tree/main/packages/drizzle) | Drizzle ORM — PostgreSQL, MySQL, SQLite |
-| [`@arx/typeorm`](https://github.com/lcubas/arx/tree/main/packages/typeorm) | TypeORM — PostgreSQL, MySQL, MariaDB, SQLite, SQL Server |
+| [`@arxjs/prisma`](https://github.com/lcubas/arx/tree/main/packages/prisma) | Prisma — PostgreSQL, MySQL, SQLite, SQL Server, MongoDB |
+| [`@arxjs/drizzle`](https://github.com/lcubas/arx/tree/main/packages/drizzle) | Drizzle ORM — PostgreSQL, MySQL, SQLite |
+| [`@arxjs/typeorm`](https://github.com/lcubas/arx/tree/main/packages/typeorm) | TypeORM — PostgreSQL, MySQL, MariaDB, SQLite, SQL Server |
 
 ## Database schema
 
@@ -191,13 +191,13 @@ Key constraints:
 If none of the official adapters fit your stack, you can implement `StorageAdapter` directly and plug it into arx.
 
 ```ts
-import type { Permission, Role, StorageAdapter } from '@arx/core'
+import type { Permission, Role, StorageAdapter } from '@arxjs/core'
 import {
   PermissionAlreadyExistsError,
   PermissionNotFoundError,
   RoleAlreadyExistsError,
   RoleNotFoundError,
-} from '@arx/core'
+} from '@arxjs/core'
 
 export class MyAdapter implements StorageAdapter {
   async createRole(name: string): Promise<Role> { ... }

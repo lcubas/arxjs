@@ -4,7 +4,7 @@ import type { Permission, Role } from './types';
  * The storage adapter contract — the port that decouples the arx
  * authorization engine from any specific ORM or database.
  *
- * Every ORM adapter (@arx/prisma, @arx/drizzle, etc.) must implement
+ * Every ORM adapter (@arxjs/prisma, @arxjs/drizzle, etc.) must implement
  * this interface. The engine calls only these methods and never imports
  * from any ORM package directly.
  *
@@ -28,7 +28,7 @@ import type { Permission, Role } from './types';
  * Methods that require an entity to exist before operating on it
  * (e.g. `grantPermissionToRole`) throw the appropriate typed error
  * (`RoleNotFoundError`, `PermissionNotFoundError`) if the entity is
- * missing. See `@arx/core` error classes for the full list.
+ * missing. See `@arxjs/core` error classes for the full list.
  */
 export interface StorageAdapter {
   /**

@@ -3,8 +3,8 @@
 Authorization library for Node.js and TypeScript. Provides Role-Based Access Control (RBAC) with direct permission grants — storage-agnostic via an adapter pattern.
 
 ```ts
-import { createAuthorization } from '@arx/core'
-import { PrismaAdapter } from '@arx/prisma'
+import { createAuthorization } from '@arxjs/core'
+import { PrismaAdapter } from '@arxjs/prisma'
 
 const { can, assignRole, createRole } = createAuthorization({
   adapter: new PrismaAdapter(prisma),
@@ -20,11 +20,11 @@ await can('user-1', 'post:edit') // true
 
 | Package | Description |
 |---|---|
-| [`@arx/core`](packages/core) | Core authorization logic and `StorageAdapter` interface |
-| [`@arx/prisma`](packages/prisma) | Adapter for [Prisma](https://www.prisma.io/) — PostgreSQL, MySQL, SQLite, SQL Server, MongoDB |
-| [`@arx/drizzle`](packages/drizzle) | Adapter for [Drizzle ORM](https://orm.drizzle.team/) — PostgreSQL, MySQL, SQLite |
-| [`@arx/typeorm`](packages/typeorm) | Adapter for [TypeORM](https://typeorm.io/) — PostgreSQL, MySQL, SQLite, SQL Server |
-| [`@arx/nestjs`](packages/nestjs) | NestJS module, injectable `ArxService`, route guard, and decorators |
+| [`@arxjs/core`](packages/core) | Core authorization logic and `StorageAdapter` interface |
+| [`@arxjs/prisma`](packages/prisma) | Adapter for [Prisma](https://www.prisma.io/) — PostgreSQL, MySQL, SQLite, SQL Server, MongoDB |
+| [`@arxjs/drizzle`](packages/drizzle) | Adapter for [Drizzle ORM](https://orm.drizzle.team/) — PostgreSQL, MySQL, SQLite |
+| [`@arxjs/typeorm`](packages/typeorm) | Adapter for [TypeORM](https://typeorm.io/) — PostgreSQL, MySQL, SQLite, SQL Server |
+| [`@arxjs/nestjs`](packages/nestjs) | NestJS module, injectable `ArxService`, route guard, and decorators |
 
 ## How it works
 

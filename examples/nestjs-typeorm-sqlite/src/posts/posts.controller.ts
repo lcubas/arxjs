@@ -1,4 +1,4 @@
-import { RequirePermissions, RequireRole } from '@arx/nestjs';
+import { RequirePermissions, RequireRole } from '@arxjs/nestjs';
 import {
   Body,
   Controller,
@@ -10,7 +10,7 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { PostsService } from './posts.service';
+import type { PostsService } from './posts.service';
 
 // Simulated post data — in a real app this would come from a database.
 const posts = [

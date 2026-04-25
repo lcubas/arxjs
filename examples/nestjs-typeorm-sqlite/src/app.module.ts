@@ -1,5 +1,5 @@
-import { ArxGuard, ArxModule } from '@arx/nestjs';
-import { ARX_TYPEORM_ENTITIES, TypeOrmAdapter } from '@arx/typeorm';
+import { ArxGuard, ArxModule } from '@arxjs/nestjs';
+import { ARX_TYPEORM_ENTITIES, TypeOrmAdapter } from '@arxjs/typeorm';
 import { ForbiddenException, Module, UnauthorizedException } from '@nestjs/common';
 import { APP_GUARD } from '@nestjs/core';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -10,7 +10,7 @@ import { SeedModule } from './seed/seed.module';
 @Module({
   imports: [
     // 1. TypeORM with SQLite — synchronize:true is fine for examples and local dev,
-    // but use migrations in production (see @arx/typeorm README).
+    // but use migrations in production (see @arxjs/typeorm README).
     TypeOrmModule.forRoot({
       type: 'better-sqlite3',
       database: ':memory:',
@@ -30,7 +30,7 @@ import { SeedModule } from './seed/seed.module';
           return id['x-user-id'] ?? undefined;
         },
         // ArxGuard delegates exception throwing to the consuming app so that
-        // @arx/nestjs stays decoupled from any specific NestJS version.
+        // @arxjs/nestjs stays decoupled from any specific NestJS version.
         onUnauthorized: () => {
           throw new UnauthorizedException();
         },

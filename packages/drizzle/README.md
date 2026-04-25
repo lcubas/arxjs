@@ -1,12 +1,12 @@
-# @arx/drizzle
+# @arxjs/drizzle
 
-[Drizzle ORM](https://orm.drizzle.team/) adapter for [`@arx/core`](https://github.com/lcubas/arx/tree/main/packages/core). Supports PostgreSQL, MySQL, and SQLite via dialect-specific adapters.
+[Drizzle ORM](https://orm.drizzle.team/) adapter for [`@arxjs/core`](https://github.com/lcubas/arx/tree/main/packages/core). Supports PostgreSQL, MySQL, and SQLite via dialect-specific adapters.
 
 ## Installation
 
 ```bash
-pnpm add @arx/drizzle @arx/core drizzle-orm
-# npm install @arx/drizzle @arx/core drizzle-orm
+pnpm add @arxjs/drizzle @arxjs/core drizzle-orm
+# npm install @arxjs/drizzle @arxjs/core drizzle-orm
 ```
 
 ## Quick start
@@ -17,8 +17,8 @@ Pick the adapter that matches your database. No schema configuration needed — 
 ```ts
 import { drizzle } from 'drizzle-orm/postgres-js'
 import postgres from 'postgres'
-import { createAuthorization } from '@arx/core'
-import { DrizzlePgAdapter } from '@arx/drizzle'
+import { createAuthorization } from '@arxjs/core'
+import { DrizzlePgAdapter } from '@arxjs/drizzle'
 
 const db = drizzle(postgres(process.env.DATABASE_URL))
 
@@ -31,8 +31,8 @@ const arx = createAuthorization({
 ```ts
 import { drizzle } from 'drizzle-orm/mysql2'
 import mysql from 'mysql2/promise'
-import { createAuthorization } from '@arx/core'
-import { DrizzleMysqlAdapter } from '@arx/drizzle'
+import { createAuthorization } from '@arxjs/core'
+import { DrizzleMysqlAdapter } from '@arxjs/drizzle'
 
 const connection = await mysql.createConnection(process.env.DATABASE_URL)
 const db = drizzle(connection)
@@ -46,8 +46,8 @@ const arx = createAuthorization({
 ```ts
 import { drizzle } from 'drizzle-orm/better-sqlite3'
 import Database from 'better-sqlite3'
-import { createAuthorization } from '@arx/core'
-import { DrizzleSqliteAdapter } from '@arx/drizzle'
+import { createAuthorization } from '@arxjs/core'
+import { DrizzleSqliteAdapter } from '@arxjs/drizzle'
 
 const db = drizzle(new Database('sqlite.db'))
 
@@ -72,9 +72,9 @@ Pick the subpath that matches your dialect and re-export its contents:
 // src/schema.ts
 
 // Re-export arx tables so drizzle-kit includes them in migrations
-export * from '@arx/drizzle/schema/pg'     // PostgreSQL
-// export * from '@arx/drizzle/schema/mysql'  // MySQL
-// export * from '@arx/drizzle/schema/sqlite' // SQLite
+export * from '@arxjs/drizzle/schema/pg'     // PostgreSQL
+// export * from '@arxjs/drizzle/schema/mysql'  // MySQL
+// export * from '@arxjs/drizzle/schema/sqlite' // SQLite
 
 // Your own tables
 export const posts = pgTable('posts', {
@@ -114,7 +114,7 @@ npx drizzle-kit push
 
 ### Option B — manual SQL
 
-If you manage your own migrations, see the [database schema reference](https://github.com/lcubas/arx/tree/main/packages/core#database-schema) in `@arx/core`. It contains a database-agnostic diagram of all five tables with their columns and constraints.
+If you manage your own migrations, see the [database schema reference](https://github.com/lcubas/arx/tree/main/packages/core#database-schema) in `@arxjs/core`. It contains a database-agnostic diagram of all five tables with their columns and constraints.
 
 ## Usage
 
@@ -124,7 +124,7 @@ await arx.assignRole('user-1', 'editor')
 await arx.can('user-1', 'post:edit') // true
 ```
 
-See [`@arx/core`](https://github.com/lcubas/arx/tree/main/packages/core) for the full API reference.
+See [`@arxjs/core`](https://github.com/lcubas/arx/tree/main/packages/core) for the full API reference.
 
 ## Schema reference
 
@@ -132,15 +132,15 @@ The arx table definitions are exported from the dialect-specific schema subpaths
 
 | Subpath | Dialect |
 |---|---|
-| `@arx/drizzle/schema/pg` | PostgreSQL |
-| `@arx/drizzle/schema/mysql` | MySQL / MariaDB |
-| `@arx/drizzle/schema/sqlite` | SQLite |
+| `@arxjs/drizzle/schema/pg` | PostgreSQL |
+| `@arxjs/drizzle/schema/mysql` | MySQL / MariaDB |
+| `@arxjs/drizzle/schema/sqlite` | SQLite |
 
 Each exports five table objects (`roles`, `permissions`, `rolePermissions`, `userRoles`, `userPermissions`) and a `schema` object that bundles all five.
 
 ```ts
 // Access individual tables if needed (e.g. for manual queries)
-import { roles, permissions } from '@arx/drizzle/schema/pg'
+import { roles, permissions } from '@arxjs/drizzle/schema/pg'
 ```
 
 ## Advanced: using the relational query API
@@ -149,7 +149,7 @@ Drizzle's relational query API (`db.query.roles.findMany(...)`) requires the sch
 
 ```ts
 import { drizzle } from 'drizzle-orm/postgres-js'
-import * as arxSchema from '@arx/drizzle/schema/pg'
+import * as arxSchema from '@arxjs/drizzle/schema/pg'
 import * as mySchema from './schema'
 
 const db = drizzle(client, {
@@ -167,8 +167,8 @@ In most cases you won't need to query arx tables directly — the adapter handle
 If you need to rename the arx tables (e.g. to avoid conflicts with existing tables), you can extend `DrizzleAdapter` with your own schema object:
 
 ```ts
-import { DrizzleAdapter } from '@arx/drizzle'
-import type { ArxDrizzleSchema } from '@arx/drizzle'
+import { DrizzleAdapter } from '@arxjs/drizzle'
+import type { ArxDrizzleSchema } from '@arxjs/drizzle'
 import { pgTable, primaryKey, text, timestamp } from 'drizzle-orm/pg-core'
 
 // Define renamed versions of the arx tables
@@ -198,7 +198,7 @@ class MyAdapter extends DrizzleAdapter {
 
 | Package | Version |
 |---|---|
-| `@arx/core` | `*` |
+| `@arxjs/core` | `*` |
 | `drizzle-orm` | `>=0.31.0` |
 
 ## License

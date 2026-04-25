@@ -5,13 +5,13 @@ import {
   createAuthorization,
   type Permission,
   type Role,
-} from '@arx/core';
+} from '@arxjs/core';
 import { Inject } from '@nestjs/common';
 import type { ArxModuleOptions } from './interfaces';
 import { ARX_MODULE_OPTIONS } from './tokens';
 
 /**
- * Injectable wrapper around the @arx/core Authorization instance.
+ * Injectable wrapper around the @arxjs/core Authorization instance.
  *
  * Import ArxModule in your feature module (or rely on the global registration)
  * and inject ArxService wherever you need programmatic access control checks.

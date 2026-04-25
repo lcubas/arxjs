@@ -12,10 +12,10 @@ import type { Permission, Role } from './types';
 export interface AuthorizationConfig {
   /**
    * The storage adapter responsible for persisting and retrieving
-   * authorization data. Use `@arx/prisma`, `@arx/drizzle`, or any
+   * authorization data. Use `@arxjs/prisma`, `@arxjs/drizzle`, or any
    * custom implementation of `StorageAdapter`.
    *
-   * For testing, use `InMemoryAdapter` from `@arx/core`.
+   * For testing, use `InMemoryAdapter` from `@arxjs/core`.
    */
   adapter: StorageAdapter;
 }
@@ -186,8 +186,8 @@ export interface Authorization {
  *
  * @example
  * // Basic setup
- * import { createAuthorization } from '@arx/core'
- * import { PrismaAdapter } from '@arx/prisma'
+ * import { createAuthorization } from '@arxjs/core'
+ * import { PrismaAdapter } from '@arxjs/prisma'
  *
  * const { can, assignRole, createRole } = createAuthorization({
  *   adapter: new PrismaAdapter(prisma),
@@ -195,7 +195,7 @@ export interface Authorization {
  *
  * @example
  * // Testing setup
- * import { createAuthorization, InMemoryAdapter } from '@arx/core'
+ * import { createAuthorization, InMemoryAdapter } from '@arxjs/core'
  *
  * const adapter = new InMemoryAdapter()
  * const auth = createAuthorization({ adapter })

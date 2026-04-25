@@ -1,13 +1,13 @@
 /**
- * @arx/typeorm — TypeORM adapter for the arx authorization library.
+ * @arxjs/typeorm — TypeORM adapter for the arx authorization library.
  *
  * ## Quick start
  *
  * ```ts
  * import 'reflect-metadata'
  * import { DataSource } from 'typeorm'
- * import { createAuthorization } from '@arx/core'
- * import { TypeOrmAdapter, ARX_TYPEORM_ENTITIES } from '@arx/typeorm'
+ * import { createAuthorization } from '@arxjs/core'
+ * import { TypeOrmAdapter, ARX_TYPEORM_ENTITIES } from '@arxjs/typeorm'
  *
  * const dataSource = new DataSource({
  *   type: 'postgres',

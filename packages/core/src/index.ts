@@ -1,11 +1,11 @@
 /**
- * @arx/core — Modern authorization library for Node.js and TypeScript.
+ * @arxjs/core — Modern authorization library for Node.js and TypeScript.
  *
  * ## Quick start
  *
  * ```ts
- * import { createAuthorization } from '@arx/core'
- * import { PrismaAdapter } from '@arx/prisma'
+ * import { createAuthorization } from '@arxjs/core'
+ * import { PrismaAdapter } from '@arxjs/prisma'
  *
  * const { can, assignRole, createRole } = createAuthorization({
  *   adapter: new PrismaAdapter(prisma),

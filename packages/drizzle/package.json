@@ -1,7 +1,7 @@
 {
-  "name": "@arx/drizzle",
+  "name": "@arxjs/drizzle",
   "version": "0.0.1",
-  "description": "Drizzle ORM adapter for @arx/core — supports PostgreSQL, MySQL, and SQLite",
+  "description": "Drizzle ORM adapter for @arxjs/core — supports PostgreSQL, MySQL, and SQLite",
   "keywords": [
     "authorization",
     "rbac",
@@ -78,16 +78,16 @@
     "access": "public"
   },
   "scripts": {
-    "build": "tsdown src/index.ts src/schema/pg.ts src/schema/mysql.ts src/schema/sqlite.ts --format esm,cjs --dts --sourcemap --no-splitting --clean --external drizzle-orm --external @arx/core",
+    "build": "tsdown src/index.ts src/schema/pg.ts src/schema/mysql.ts src/schema/sqlite.ts --format esm,cjs --dts --sourcemap --no-splitting --clean --external drizzle-orm --external @arxjs/core",
     "test": "vitest run",
     "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
-    "@arx/core": "*",
+    "@arxjs/core": "*",
     "drizzle-orm": ">=0.31.0"
   },
   "devDependencies": {
-    "@arx/core": "workspace:*",
+    "@arxjs/core": "workspace:*",
     "@types/node": "*",
     "drizzle-orm": "^0.38.0",
     "tsdown": "^0.21.0",

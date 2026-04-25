@@ -7,8 +7,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@arx/core": "workspace:*",
-    "@arx/drizzle": "workspace:*",
+    "@arxjs/core": "workspace:*",
+    "@arxjs/drizzle": "workspace:*",
     "better-sqlite3": "^11.8.1",
     "drizzle-orm": "^0.38.0",
     "express": "^4.21.2"

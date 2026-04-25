@@ -1,7 +1,7 @@
 {
-  "name": "@arx/typeorm",
+  "name": "@arxjs/typeorm",
   "version": "0.0.1",
-  "description": "TypeORM adapter for @arx/core — supports PostgreSQL, MySQL, SQLite, and more",
+  "description": "TypeORM adapter for @arxjs/core — supports PostgreSQL, MySQL, SQLite, and more",
   "keywords": [
     "authorization",
     "rbac",
@@ -47,16 +47,16 @@
     "access": "public"
   },
   "scripts": {
-    "build": "tsdown src/index.ts --format esm,cjs --dts --sourcemap --no-splitting --clean --external typeorm --external @arx/core",
+    "build": "tsdown src/index.ts --format esm,cjs --dts --sourcemap --no-splitting --clean --external typeorm --external @arxjs/core",
     "test": "vitest run",
     "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
-    "@arx/core": "*",
+    "@arxjs/core": "*",
     "typeorm": ">=0.3.0"
   },
   "devDependencies": {
-    "@arx/core": "workspace:*",
+    "@arxjs/core": "workspace:*",
     "@types/node": "*",
     "reflect-metadata": "^0.2.0",
     "tsdown": "^0.21.0",

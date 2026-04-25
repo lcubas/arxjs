@@ -6,7 +6,7 @@ import type { ArxModuleAsyncOptions, ArxModuleOptions } from './interfaces';
 import { ARX_MODULE_OPTIONS } from './tokens';
 
 /**
- * NestJS module for @arx/core.
+ * NestJS module for @arxjs/core.
  *
  * Provides ArxService and ArxGuard across your application.
  * By default the module is global — import it once in AppModule.

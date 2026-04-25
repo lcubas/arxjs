@@ -21,16 +21,16 @@
     "prepare": "simple-git-hooks"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.4.11",
-    "@changesets/cli": "^2.30.0",
+    "@biomejs/biome": "^2.4.13",
+    "@changesets/cli": "^2.31.0",
     "@commitlint/config-conventional": "^19.8.1",
     "commitlint": "^19.8.1",
     "lint-staged": "^15.5.2",
     "simple-git-hooks": "^2.13.1",
-    "tsdown": "^0.21.7",
+    "tsdown": "^0.21.10",
     "turbo": "^2.9.6",
     "typescript": "^5.9.3",
-    "vitest": "^4.1.4"
+    "vitest": "^4.1.5"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged",

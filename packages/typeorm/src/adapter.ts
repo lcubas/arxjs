@@ -1,11 +1,11 @@
 import { randomUUID } from 'node:crypto';
-import type { Permission, Role, StorageAdapter } from '@arx/core';
+import type { Permission, Role, StorageAdapter } from '@arxjs/core';
 import {
   PermissionAlreadyExistsError,
   PermissionNotFoundError,
   RoleAlreadyExistsError,
   RoleNotFoundError,
-} from '@arx/core';
+} from '@arxjs/core';
 import type { DataSource } from 'typeorm';
 import { QueryFailedError } from 'typeorm';
 import {
@@ -53,8 +53,8 @@ function toPermission(entity: ArxPermission): Permission {
  * @example
  * import 'reflect-metadata'
  * import { DataSource } from 'typeorm'
- * import { createAuthorization } from '@arx/core'
- * import { TypeOrmAdapter, ARX_TYPEORM_ENTITIES } from '@arx/typeorm'
+ * import { createAuthorization } from '@arxjs/core'
+ * import { TypeOrmAdapter, ARX_TYPEORM_ENTITIES } from '@arxjs/typeorm'
  *
  * const dataSource = new DataSource({
  *   type: 'postgres',

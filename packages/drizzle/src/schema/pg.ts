@@ -55,8 +55,8 @@ export const userPermissions = pgTable(
  *
  * @example
  * import { drizzle } from 'drizzle-orm/postgres-js'
- * import { schema } from '@arx/drizzle/schema/pg'
- * import { DrizzleAdapter } from '@arx/drizzle'
+ * import { schema } from '@arxjs/drizzle/schema/pg'
+ * import { DrizzleAdapter } from '@arxjs/drizzle'
  *
  * const db = drizzle(client)
  * const adapter = new DrizzleAdapter(db, schema)

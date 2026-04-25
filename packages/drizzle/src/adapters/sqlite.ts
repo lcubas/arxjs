@@ -6,13 +6,13 @@ import { schema } from '../schema/sqlite';
  *
  * Bundles the SQLite schema internally — no schema argument needed.
  * Run `drizzle-kit generate` then `drizzle-kit migrate` (or push) using
- * the schema from `@arx/drizzle/schema/sqlite` before using this adapter.
+ * the schema from `@arxjs/drizzle/schema/sqlite` before using this adapter.
  *
  * @example
  * import { drizzle } from 'drizzle-orm/better-sqlite3'
  * import Database from 'better-sqlite3'
- * import { createAuthorization } from '@arx/core'
- * import { DrizzleSqliteAdapter } from '@arx/drizzle'
+ * import { createAuthorization } from '@arxjs/core'
+ * import { DrizzleSqliteAdapter } from '@arxjs/drizzle'
  *
  * const db = drizzle(new Database('sqlite.db'))
  *
