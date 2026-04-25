@@ -12,12 +12,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/lcubas/arx.git",
+    "url": "https://github.com/lcubas/arxjs.git",
     "directory": "packages/prisma"
   },
-  "homepage": "https://github.com/lcubas/arx/tree/main/packages/prisma#readme",
+  "homepage": "https://github.com/lcubas/arxjs/tree/main/packages/prisma#readme",
   "bugs": {
-    "url": "https://github.com/lcubas/arx/issues"
+    "url": "https://github.com/lcubas/arxjs/issues"
   },
   "type": "module",
   "engines": {
@@ -53,11 +53,11 @@
     "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
-    "@prisma/client": ">=5.0.0",
+    "@prisma/client": "^5.0.0 || ^6.0.0",
     "@arxjs/core": "*"
   },
   "devDependencies": {
-    "@prisma/client": "^5.0.0",
+    "@prisma/client": "^6.0.0",
     "@arxjs/core": "workspace:*",
     "tsdown": "^0.21.0",
     "typescript": "^5.7.0",

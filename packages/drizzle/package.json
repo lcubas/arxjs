@@ -13,12 +13,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/lcubas/arx.git",
+    "url": "https://github.com/lcubas/arxjs.git",
     "directory": "packages/drizzle"
   },
-  "homepage": "https://github.com/lcubas/arx/tree/main/packages/drizzle#readme",
+  "homepage": "https://github.com/lcubas/arxjs/tree/main/packages/drizzle#readme",
   "bugs": {
-    "url": "https://github.com/lcubas/arx/issues"
+    "url": "https://github.com/lcubas/arxjs/issues"
   },
   "type": "module",
   "engines": {
@@ -84,7 +84,7 @@
   },
   "peerDependencies": {
     "@arxjs/core": "*",
-    "drizzle-orm": ">=0.31.0"
+    "drizzle-orm": ">=0.31.0 <2.0.0"
   },
   "devDependencies": {
     "@arxjs/core": "workspace:*",

@@ -12,12 +12,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/lcubas/arx.git",
+    "url": "https://github.com/lcubas/arxjs.git",
     "directory": "packages/typeorm"
   },
-  "homepage": "https://github.com/lcubas/arx/tree/main/packages/typeorm#readme",
+  "homepage": "https://github.com/lcubas/arxjs/tree/main/packages/typeorm#readme",
   "bugs": {
-    "url": "https://github.com/lcubas/arx/issues"
+    "url": "https://github.com/lcubas/arxjs/issues"
   },
   "type": "module",
   "engines": {
